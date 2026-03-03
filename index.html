@@ -2,135 +2,33 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <!-- Meta tag essencial para mobile e iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>CBM - Registro Mobile</title>
     <style>
-        :root { 
-            --primary: #d32f2f; 
-            --secondary: #2e7d32; 
-        }
-
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background-image: url('https://lh3.googleusercontent.com/d/1GAVAZJ7wPXu5dE_6qFKsnSPyJVwQJ6vn');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            display: flex; 
-            justify-content: center; 
-            padding: 10px;
-            margin: 0; 
-            min-height: 100vh;
-        }
-
-        .card { 
-            background: rgba(255, 255, 255, 0.97); 
-            padding: 20px; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
-            width: 100%; 
-            max-width: 800px; 
-            text-align: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-sizing: border-box;
-        }
-        
-        .logo-container { margin-bottom: 10px; }
-        .logo-container img { 
-            width: 150px; 
-            max-width: 100%;
-            height: auto; 
-            display: block;
-            margin: 0 auto;
-        }
-
-        h2 { 
-            color: var(--primary); 
-            margin-top: 10px; 
-            border-bottom: 2px solid #eee; 
-            padding-bottom: 10px; 
-            font-size: 1.2rem; 
-            text-transform: uppercase; 
-        }
-        
-        label { 
-            display: block; 
-            font-weight: bold; 
-            margin-top: 15px; 
-            text-align: left; 
-            font-size: 14px; 
-            color: #444; 
-        }
-
-        /* Otimização para iPhone/Mobile */
-        select, input { 
-            width: 100%; 
-            padding: 14px; 
-            margin-top: 5px; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 16px; /* Impede zoom automático no iOS */
-            -webkit-appearance: none;
-            background-color: white;
-        }
-
-        .resumo-container { 
-            background: #fafafa; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            margin: 20px 0; 
-            display: none; 
-            text-align: left; 
-            overflow-x: auto;
-        }
-
-        .resumo-header { background: #333; color: white; padding: 10px; font-size: 11px; text-align: center; font-weight: bold; text-transform: uppercase; }
-        
+        :root { --primary: #d32f2f; --secondary: #2e7d32; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-image: url('https://lh3.googleusercontent.com/d/1GAVAZJ7wPXu5dE_6qFKsnSPyJVwQJ6vn'); background-size: cover; background-position: center; background-attachment: fixed; display: flex; justify-content: center; padding: 10px; margin: 0; min-height: 100vh; }
+        .card { background: rgba(255, 255, 255, 0.97); padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); width: 100%; max-width: 800px; text-align: center; backdrop-filter: blur(10px); box-sizing: border-box; }
+        .logo-container img { width: 150px; max-width: 100%; height: auto; display: block; margin: 0 auto 10px; }
+        h2 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; }
+        label { display: block; font-weight: bold; margin-top: 15px; text-align: left; font-size: 14px; color: #444; }
+        select, input { width: 100%; padding: 14px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; -webkit-appearance: none; background: white; }
+        .resumo-container { background: #fafafa; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0; display: none; text-align: left; }
+        .resumo-header { background: #333; color: white; padding: 10px; font-size: 11px; text-align: center; font-weight: bold; }
         .tabela-resumo { width: 100%; border-collapse: collapse; font-size: 12px; }
         .tabela-resumo th { background: #f1f1f1; padding: 10px; border: 1px solid #eee; width: 40%; color: #666; text-align: left; }
         .tabela-resumo td { padding: 10px; border: 1px solid #eee; color: var(--primary); font-weight: bold; }
-
         .preview-box { margin-top: 20px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; display: none; background: white; }
         .preview-box iframe { width: 100%; height: 300px; border: none; }
-
-        button { 
-            width: 100%; 
-            background: var(--secondary); 
-            color: white; 
-            border: none; 
-            padding: 18px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 18px; 
-            font-weight: bold; 
-            margin-top: 25px; 
-            transition: 0.3s;
-            -webkit-tap-highlight-color: transparent;
-        }
-        button:active { background: #1b5e20; transform: scale(0.98); }
-
+        button { width: 100%; background: var(--secondary); color: white; border: none; padding: 18px; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 25px; }
         .loading { color: var(--primary); padding: 20px; font-weight: bold; }
-
-        @media (max-width: 480px) {
-            .card { padding: 15px; }
-            h2 { font-size: 1rem; }
-            .tabela-resumo th, .tabela-resumo td { padding: 8px; font-size: 11px; }
-        }
     </style>
 </head>
 <body>
 
 <div class="card">
     <div class="logo-container">
-        <!-- Seu Link da Logo Mantido -->
         <img src="https://lh3.googleusercontent.com/d/1di79KvirmO-FntvmVqmU76TxJO5I4mwb" alt="Logo CBM">
     </div>
-
     <h2>Registro e Consulta CBM</h2>
     
     <label>Selecione a Categoria:</label>
@@ -148,13 +46,11 @@
 
     <div id="status"></div>
 
-    <!-- Preview da Planilha -->
     <div id="previewContainer" class="preview-box">
-        <div class="resumo-header">👀 CONSULTA RÁPIDA (HISTÓRICO DA ABA)</div>
+        <div class="resumo-header">👀 CONSULTA RÁPIDA (HISTÓRICO)</div>
         <iframe id="sheetPreview" src=""></iframe>
     </div>
 
-    <!-- Último Registro -->
     <div id="resumoContainer" class="resumo-container">
         <div class="resumo-header">🔍 ÚLTIMO LANÇAMENTO</div>
         <table id="tabelaResumo" class="tabela-resumo"></table>
@@ -167,7 +63,7 @@
 </div>
 
 <script>
-    // Seus Links de Script e Planilha Mantidos
+    // VERIFIQUE ESTA URL: Deve ser a do ÚLTIMO deploy (Nova Versão) que você fez no Google
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhCBNFPDkKBIKR4nm-Z-7F_cSHhLsLDnq1BtcPjNRwm2LnCRVFcXkhNsqiWJ9b2a73/exec";
     const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/1sv9dplCGivR3x6SF80fdXA48PL5oFHz_z98XE2zRmG4/htmlembed";
 
@@ -182,53 +78,46 @@
 
     selectAba.addEventListener("change", async function() {
         const aba = this.value;
-        status.innerHTML = '<div class="loading">⏳ Conectando à planilha...</div>';
+        status.innerHTML = '<div class="loading">⏳ Conectando...</div>';
         resumoContainer.style.display = "none";
         previewContainer.style.display = "none";
         form.style.display = "none";
         container.innerHTML = "";
 
         try {
-            // Busca dados no script
-            const res = await fetch(`${SCRIPT_URL}?action=getHeaders&sheetName=${aba}`);
+            const fetchUrl = `${SCRIPT_URL}?action=getHeaders&sheetName=${aba}`;
+            const res = await fetch(fetchUrl);
+            
+            if (!res.ok) throw new Error("Erro na rede: " + res.status);
+            
             const data = await res.json();
             status.innerHTML = "";
 
-            if (data.headers && data.headers.length > 0) {
-                
-                // CORREÇÃO AQUI: Atualiza o preview com o sheetId (gid) correto recebido do script
-                // Se o seu script não estiver enviando o "sheetId", o preview voltará para a primeira aba.
-                if (data.sheetId !== undefined) {
-                    sheetPreview.src = `${SHEET_BASE_URL}?gid=${data.sheetId}&widget=false&chrome=false&headers=false`;
-                } else {
-                    sheetPreview.src = `${SHEET_BASE_URL}?widget=false&chrome=false&headers=false`;
-                }
-                
+            if (data.error) {
+                status.innerHTML = "❌ Erro no Script: " + data.error;
+                return;
+            }
+
+            if (data.headers) {
+                sheetPreview.src = `${SHEET_BASE_URL}?gid=${data.sheetId}&widget=false&chrome=false&headers=false`;
                 previewContainer.style.display = "block";
 
                 let resumoHTML = "";
                 data.headers.forEach((titulo, index) => {
-                    const valorAnterior = (data.lastRowValues && data.lastRowValues[index] !== undefined && data.lastRowValues[index] !== "") 
-                                          ? data.lastRowValues[index] : "---";
-
+                    const valorAnterior = (data.lastRowValues && data.lastRowValues[index] !== undefined) ? data.lastRowValues[index] : "---";
                     resumoHTML += `<tr><th>${titulo}</th><td>${valorAnterior}</td></tr>`;
-
-                    const div = document.createElement("div");
-                    div.innerHTML = `<label>${titulo}</label><input type="text" name="i_${index}" required placeholder="Novo valor para ${titulo}...">`;
-                    container.appendChild(div);
+                    container.innerHTML += `<label>${titulo}</label><input type="text" name="i_${index}" required placeholder="Digite aqui...">`;
                 });
 
                 tabelaResumo.innerHTML = resumoHTML;
                 resumoContainer.style.display = "block";
                 form.style.display = "block";
-                
-                setTimeout(() => {
-                    form.scrollIntoView({ behavior: 'smooth' });
-                }, 500);
+                setTimeout(() => form.scrollIntoView({ behavior: 'smooth' }), 500);
             }
         } catch (e) {
-            status.innerHTML = "❌ Erro ao carregar dados da aba " + aba;
-            console.error(e);
+            status.innerHTML = "❌ Erro ao carregar dados. Verifique a URL do Script.";
+            console.error("Erro detalhado:", e);
+            alert("Erro técnico: " + e.message + "\nVerifique se o script está publicado para 'Qualquer Pessoa'.");
         }
     });
 
@@ -240,22 +129,14 @@
         btn.innerText = "ENVIANDO...";
 
         try {
-            await fetch(SCRIPT_URL, { 
-                method: "POST", 
-                mode: "no-cors", 
-                body: JSON.stringify({ aba: selectAba.value, valores: valores }) 
-            });
-            alert("✅ Registro salvo com sucesso!");
-            form.reset();
-            selectAba.dispatchEvent(new Event('change'));
+            await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ aba: selectAba.value, valores: valores }) });
+            alert("✅ Registro salvo!");
+            location.reload();
         } catch (error) {
             alert("❌ Erro ao salvar.");
-        } finally {
             btn.disabled = false;
-            btn.innerText = "SALVAR REGISTRO";
         }
     });
 </script>
-
 </body>
 </html>
